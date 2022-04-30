@@ -29,7 +29,7 @@ def main():
         if start_button.draw(WIN):
             #pygame.mixer.music.play(0)
             WIN.fill((0,0,0))
-            Pgm.main()
+            Pgm.rungame()
         if exit_button.draw(WIN):
             pygame.quit()
             break

@@ -133,7 +133,6 @@ def rungame():
                 print('plr2:', plr2)
                 if firstclick == True:
                     firstclick = False
-        print('firstclick:', firstclick)
 
         for x in range(0,15):
             for y in range(0, 15):
