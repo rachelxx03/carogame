@@ -33,13 +33,12 @@ gridarr = [[0 for x in range(15)] for y in range(15)]
 dia=[1,15,16,14]
 
 
-def main():
+def rungame():
     pygame.init()
     run = True
     clock = pygame.time.Clock()
-    #Check if it is Player 1's turn
+    #Check if it is Player 2's turn
     p2t = True
-    #Check if Player 1'
 
     #Player 1 and PLayer 2 input lists
     plr1 = []
@@ -97,8 +96,8 @@ def main():
                     print("you win")
                     return 1
 
+    firstclick = True
     while run:
-
         window.fill(WHITE)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -115,23 +114,26 @@ def main():
                         p2t = p2t
                     else:
                         p2t = not p2t
-                    if not p2t:
-                        gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'X'
-                        plr1.append(blockno)
-                        result = win_able(plr1,blockno)
-                        if result == 1:
-                            run = False
-                    else:
-                        gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'O'
-                        plr2.append(blockno)
-                        result = win_able(plr2,blockno)
-                        if result==1:
-                            run = False
+                    if not firstclick:
+                        if not p2t:
+                            gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'X'
+                            plr1.append(blockno)
+                            result = win_able(plr1,blockno)
+                            if result == 1:
+                                run = False
+                        else:
+                            gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'O'
+                            plr2.append(blockno)
+                            result = win_able(plr2,blockno)
+                            if result==1:
+                                run = False
 
                 print('blk:',blockno)
                 print('plr1:', plr1)
                 print('plr2:', plr2)
-
+                if firstclick == True:
+                    firstclick = False
+        print('firstclick:', firstclick)
 
         for x in range(0,15):
             for y in range(0, 15):
@@ -158,4 +160,4 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    rungame()
