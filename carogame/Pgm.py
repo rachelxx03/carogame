@@ -1,5 +1,5 @@
 import os
-
+from button import Button
 import pygame
 from pygame import mixer
 mixer.init()
@@ -43,14 +43,10 @@ def rungame():
     #Player 1 and PLayer 2 input lists
     plr1 = []
     plr2 = []
-    #Win Display
-    def windisplay():
-        poplft = width//8
-        poptop = height//3
-        popwdt = width *(6/8)
-        pophgt = height//3
-        winpop = pygame.Rect(poplft, poptop, popwdt, pophgt)
-        pygame.draw.rect(window, TURQUOISE, winpop)
+    p1w = True
+    end = False
+
+
 
     #Cheking for wins
     def win_able(plr,blockno):
@@ -88,7 +84,6 @@ def rungame():
                                      m=blockno
                                      l=False
                                 m-=dia[k]
-                        print('left, right:',countlef,countrig)
                         if countlef+countrig>=5:
                             return 1
                 result= win_check(blockno,dia,k)
@@ -98,6 +93,8 @@ def rungame():
 
     firstclick = True
     while run:
+
+
         window.fill(WHITE)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -114,23 +111,22 @@ def rungame():
                         p2t = p2t
                     else:
                         p2t = not p2t
-                    if not firstclick:
+                    if not firstclick and not end:
                         if not p2t:
                             gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'X'
                             plr1.append(blockno)
                             result = win_able(plr1,blockno)
                             if result == 1:
-                                run = False
+                                end = True
+                                p1w = True
                         else:
                             gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'O'
                             plr2.append(blockno)
                             result = win_able(plr2,blockno)
                             if result==1:
-                                run = False
+                                end = True
+                                p1w = False
 
-                print('blk:',blockno)
-                print('plr1:', plr1)
-                print('plr2:', plr2)
                 if firstclick == True:
                     firstclick = False
 
@@ -151,6 +147,19 @@ def rungame():
                     #rectum = pygame.Rect(x*(2+size), y*(2+size), size, size)
                     #pygame.draw.rect(window,color, rectum)
                     window.blit(O, (x*(2+size), y*(2+size)))
+        if end:
+
+            poplft = width//8
+            poptop = height//3
+            popwdt = width*(6/8)
+            pophgt = height//3
+            winpop = pygame.Rect(poplft, poptop, popwdt, pophgt)
+            pygame.draw.rect(window, BLACK, winpop)
+            pygame.draw.rect(window,WHITE, winpop, 1)
+            if p1w:
+                text = "Player 1 Wins"
+                
+
         pygame.display.update()
         clock.tick(FPS)
 
