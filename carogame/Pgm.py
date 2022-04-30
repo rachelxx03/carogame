@@ -203,13 +203,8 @@ def rungame():
                     if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
                         run = False
             pygame.display.update()
-
-                
-
         pygame.display.update()
         clock.tick(FPS)
-
-
 
     pygame.quit()
 

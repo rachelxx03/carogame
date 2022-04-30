@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 import os.path
 from button import Button
 import Pgm
@@ -12,17 +12,6 @@ BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "back.png")
 def get_font(size):
     pygame.font.init()# Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
-
-def play():
-    pygame.init()
-    run = True
-    while run:
-        Pgm.rungame()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-        pygame.display.update()
-
 
 def main_menu():
     running = True
@@ -49,11 +38,10 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONUP:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    play()
+                    Pgm.rungame()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
-
                     pygame.quit()
         pygame.display.update()
 
