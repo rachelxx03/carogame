@@ -2,6 +2,11 @@ import os
 from button import Button
 import pygame
 from pygame import mixer
+from button import Button
+import endgame as eg
+
+def get_font(size): # Returns Press-Start-2P in the desired size
+    return pygame.font.Font("assets/font.ttf", size)
 mixer.init()
 pygame.mixer.music.load('Smells Like Burning Corpse.mp3')
 #play the music infinitely
@@ -138,16 +143,13 @@ def rungame():
                     rectum = pygame.Rect(x*(2+size), y*(2+size), size, size)
                     pygame.draw.rect(window,color, rectum)
                 elif gridarr[x][y] == 'X':
-                    #color = RED
-                    #rectum = pygame.Rect(x*(2+size), y*(2+size), size, size)
-                    #pygame.draw.rect(window,color, rectum)
+
                     window.blit(X, (x*(2+size), y*(2+size)))
                 elif gridarr[x][y] == 'O':
-                    #color = TURQUOISE
-                    #rectum = pygame.Rect(x*(2+size), y*(2+size), size, size)
-                    #pygame.draw.rect(window,color, rectum)
+
                     window.blit(O, (x*(2+size), y*(2+size)))
         if end:
+
 
             poplft = width//8
             poptop = height//3
@@ -156,6 +158,37 @@ def rungame():
             winpop = pygame.Rect(poplft, poptop, popwdt, pophgt)
             pygame.draw.rect(window, BLACK, winpop)
             pygame.draw.rect(window,WHITE, winpop, 1)
+            MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+            MENU_TEXT = get_font(45).render("YOU WIN", True, "#b68f40")
+            MENU_RECT = MENU_TEXT.get_rect(center=(370, 300))
+
+            REPLAY_BUTTON = Button(image=None, pos=(220, 400),
+                                 text_input="REPLAY", font=get_font(25), base_color="White", hovering_color="#8cdb6a")
+
+            QUIT_BUTTON = Button(image=None, pos=(550, 400),
+                                 text_input="QUIT", font=get_font(25), base_color="White", hovering_color="#8cdb6a")
+
+            window.blit(MENU_TEXT, MENU_RECT)
+
+            for button in [REPLAY_BUTTON, QUIT_BUTTON]:
+                button.changeColor(MENU_MOUSE_POS)
+                button.update(window)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
+                        play()
+                        rungame()
+
+                    if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                        pygame.quit()
+                        sys.exit()
+
+            pygame.display.update()
             if p1w:
                 text = "Player 1 Wins"
                 
