@@ -6,7 +6,7 @@ import Pgm
 pygame.init()
 
 SCREEN = pygame.display.set_mode((750, 750))
-pygame.display.set_caption("Menu")
+pygame.display.set_caption("Caro")
 
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "back.png")),(750,750))
 

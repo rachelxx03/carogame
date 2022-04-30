@@ -3,8 +3,7 @@ from button import Button
 import pygame
 from pygame import mixer
 from button import Button
-import endgame as eg
-
+import sys
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 mixer.init()
@@ -16,8 +15,8 @@ height = 750
 #Size of square
 size = 48
 window = pygame.display.set_mode((width,height))
-caption = pygame.display.set_caption("The Eye")
-icon = pygame.image.load(os.path.join('ASSETS',"Jupe.png"))
+caption = pygame.display.set_caption("Caro")
+icon = pygame.image.load(os.path.join('ASSETS',"carologo.png"))
 #Importing Sprites
 picX = pygame.image.load(os.path.join('ASSETS',"Xtac.png"))
 picO = pygame.image.load(os.path.join('ASSETS',"Otac.png"))
@@ -33,17 +32,18 @@ TURQUOISE = (72,209,204)
 
 pygame.display.set_icon(icon)
 #Creating array-backed grid
-gridarr = [[0 for x in range(15)] for y in range(15)]
+
 
 dia=[1,15,16,14]
 
 
 def rungame():
+    gridarr = [[0 for x in range(15)] for y in range(15)]
     pygame.init()
     run = True
     clock = pygame.time.Clock()
     #Check if it is Player 2's turn
-    p2t = True
+    p1t = True
 
     #Player 1 and PLayer 2 input lists
     plr1 = []
@@ -99,7 +99,6 @@ def rungame():
     firstclick = True
     while run:
 
-
         window.fill(WHITE)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -109,15 +108,14 @@ def rungame():
                 pos = pygame.mouse.get_pos()
                 #Input block number
                 blockno = (pos[0]//(2+size) + (pos[1]//(2+size))*15)
-                blocklefttop = (pos[0]//(2+size)*(2+size), pos[1]//(2+size)*(2+size))
                 #Update gridarr with X or O
                 if gridarr[pos[0]//(2+size)][pos[1]//(2+size)] == 0:
                     if (blockno in plr1) or (blockno in plr2):
-                        p2t = p2t
+                        p1t = p1t
                     else:
-                        p2t = not p2t
+                        p1t = not p1t
                     if not firstclick and not end:
-                        if not p2t:
+                        if p1t:
                             gridarr[pos[0]//(2+size)][pos[1]//(2+size)] = 'X'
                             plr1.append(blockno)
                             result = win_able(plr1,blockno)
@@ -150,7 +148,6 @@ def rungame():
                     window.blit(O, (x*(2+size), y*(2+size)))
         if end:
 
-
             poplft = width//8
             poptop = height//3
             popwdt = width*(6/8)
@@ -159,8 +156,10 @@ def rungame():
             pygame.draw.rect(window, BLACK, winpop)
             pygame.draw.rect(window,WHITE, winpop, 1)
             MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-            MENU_TEXT = get_font(45).render("YOU WIN", True, "#b68f40")
+            if p1w:
+                MENU_TEXT = get_font(45).render("P1 WINS", True, "#b68f40")
+            elif not p1w:
+                MENU_TEXT = get_font(45).render("P2 WINS", True, "#b68f40")
             MENU_RECT = MENU_TEXT.get_rect(center=(370, 300))
 
             REPLAY_BUTTON = Button(image=None, pos=(220, 400),
@@ -180,17 +179,24 @@ def rungame():
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                        play()
-                        rungame()
+                    if REPLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
+                        end = False
+                        firstclick = True
+                        gridarr = [[0 for x in range(15)] for y in range(15)]
+                        p1t = True
+                        p1w = True
+                        plr1 = []
+                        plr2 = []
+
+
+
+
 
                     if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
                         pygame.quit()
-                        sys.exit()
 
             pygame.display.update()
-            if p1w:
-                text = "Player 1 Wins"
+
                 
 
         pygame.display.update()
