@@ -7,30 +7,26 @@ pygame.init()
 
 SCREEN = pygame.display.set_mode((750, 750))
 pygame.display.set_caption("Caro")
-
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "back.png")),(750,750))
 
-def get_font(size): # Returns Press-Start-2P in the desired size
+def get_font(size):
+    pygame.font.init()# Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
 def play():
-    while True:
+    pygame.init()
+    run = True
+    while run:
         Pgm.rungame()
-
-
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
-
-
         pygame.display.update()
-    
 
 
 def main_menu():
-    while True:
+    running = True
+    while running:
         SCREEN.blit(BG, (0, 0))
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -53,14 +49,12 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     play()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    pygame.quit()
-                    sys.exit()
 
+                    pygame.quit()
         pygame.display.update()
 
 main_menu()
