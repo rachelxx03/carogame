@@ -1,0 +1,16 @@
+F,301.841.73,9.99,HOLMÖ,Floor lamp - gives a soft mood light,*none*,75,116,22,2.2
+F,703.047.29,69.99,ANTIFONI,Floor/reading lamp,nickel plated,6.3,180,24,2.5
+F,902.865.69,49.99,SAMTID,Floor/reading lamp,nickel plated/white,100,152,25,3.5
+F,903.498.97,79.99,YPPERLIG,LED floor lamp,dark gray,7,122,15,3.5
+A,102.335.32,49.00,NOLMYRA,Armless mesh chair,black/black,64,75,75,59,46,40
+A,500.395.52,69.99,IKEA PS GULLHOLMEN,Rocking chair,banana fibre,62,68,75,44,47,34
+A,991.256.71,99.00,POÄNG,Armchair - birch veneer,Ransta red,68,82,100,56,60,42
+A,403.424.88,199.00,VEDBO,Armchair,Gunnared dark gray,75,73,65,45,48,44
+N,702.155.25,19.99,NESNA,Nighstand,bamboo,36,35,45
+N,443.611.09,19.99,RAST,Nightstand,pine,52,30,40
+N,603.221.30,39.99,KULLEN,2-Drawer Chest,black-brown,35,40,49
+N,602.360.24,59.99,TRYSIL,Nighstand,dark brown/black,45,40,53
+B,190.098.21,99.00,FJELLSE,Bed frame,Luröy pine,197,142,33,80
+B,490.075.66,179.00,BRUSALI,Bed frame,Luröy brown,208,198,46,93
+B,290.077.94,189.00,TARVA,Bed frame,Luröy pine,209,160,32,92
+B,090.078.13,199.00,TRYSIL,Bed frame,Luröy dark brown,220,157,40,98
